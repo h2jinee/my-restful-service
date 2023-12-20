@@ -8,6 +8,20 @@ logging:
 spring:
   messages:
     basename: messages
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    defer-datasource-initialization: true
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+
 #  security:
 #    user:
 #      name: username
