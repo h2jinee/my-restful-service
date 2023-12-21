@@ -10,10 +10,12 @@ import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(value = {"password", "ssn"})
 @Schema(description = "사용자 상세 정보를 위한 도메인 객체")
