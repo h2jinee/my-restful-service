@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -29,8 +31,15 @@ public class UserJpaController {
 
     // /jpa/users
     @GetMapping("/users")
-    public List<User> retrieveAllUsers() {
-        return userRepository.findAll();
+    public ResponseEntity<Map<String, Object>> retrieveAllUsers() {
+        List<User> users = userRepository.findAll();
+        long count = userRepository.count();
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("users", users);
+        response.put("count", count);
+
+        return ResponseEntity.ok(response);
     }
 
     // /jpa/users/{id}
