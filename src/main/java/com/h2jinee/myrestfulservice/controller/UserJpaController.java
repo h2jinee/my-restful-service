@@ -1,5 +1,6 @@
 package com.h2jinee.myrestfulservice.controller;
 
+import com.h2jinee.myrestfulservice.bean.Post;
 import com.h2jinee.myrestfulservice.bean.User;
 import com.h2jinee.myrestfulservice.exception.UserNotFoundException;
 import com.h2jinee.myrestfulservice.repository.UserRepository;
@@ -75,5 +76,15 @@ public class UserJpaController {
                 .toUri();
 
         return ResponseEntity.created(location).build();
+    }
+
+    @GetMapping("/users/{id}/posts")
+    public List<Post> retrieveAllPostsByUser(@PathVariable int id) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isEmpty()) {
+            throw new UserNotFoundException("id - " + id);
+        }
+
+        return user.get().getPosts();
     }
 }
